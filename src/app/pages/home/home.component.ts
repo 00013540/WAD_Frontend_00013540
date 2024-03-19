@@ -5,6 +5,9 @@ import {NewTasksComponent} from "../../components/new-tasks/new-tasks.component"
 import {ServiceTaskTrackerService} from "../../service-task-tracker.service";
 import {ITask} from "../../interfaces/ITask.type";
 import {StatusEnum} from "../../enums/TaskEnum.type";
+import {MatButtonModule} from "@angular/material/button";
+import {Router} from "@angular/router";
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -13,15 +16,19 @@ import {StatusEnum} from "../../enums/TaskEnum.type";
     DoneTasksComponent,
     InProgressTasksComponent,
     NewTasksComponent,
+    MatButtonModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
+  router = inject(Router)
   serviceTaskTracker = inject(ServiceTaskTrackerService)
   newTasks: ITask[] = []
   inProgressTasks: ITask[] = []
   doneTasks: ITask[] = []
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.getTasks()
@@ -33,5 +40,9 @@ export class HomeComponent {
       this.inProgressTasks = tasks.filter((task) => task.status === StatusEnum.IN_PROGRESS)
       this.doneTasks = tasks.filter((task) => task.status === StatusEnum.DONE)
     })
+  }
+
+  createTask() {
+    this.router.navigateByUrl('/create')
   }
 }

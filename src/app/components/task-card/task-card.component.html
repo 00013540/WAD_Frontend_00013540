@@ -1,7 +1,12 @@
-<!-- task-card.component.html -->
 <div class="bg-white shadow-md p-4 mb-4 rounded-xl">
-  <h3 class="font-semibold text-lg">Title</h3>
-  <p class="text-gray-600">Description</p>
-  <p class="text-gray-600">Due Date: 12.10.2023</p>
-  <p>Priority: Low</p>
+  <h3 class="font-semibold text-lg mb-2 text-cyan-400">{{ task?.title }}</h3>
+  <p class="mb-2 text-teal-500 font-medium">{{ task?.description }}</p>
+  <p class="text-gray-600 mb-2">Due Date: {{ formatDateString(task?.dueDate || '') }}</p>
+  <p><span class="mr-3">Priority:</span> <span class="bg-amber-200 px-3 py-1 rounded">{{ task?.priority === 0 ? PRIORITY[0] : task?.priority === 1 ? PRIORITY[1] : PRIORITY[2] }}</span></p>
+  <div class="flex align-middle mt-3">
+    <button *ngIf="task?.status === 0" class="mr-2" mat-raised-button color="primary" (click)="moveToInProgress(task!)">Move to "In Progress"</button>
+    <button *ngIf="task?.status === 1" class="mr-2" mat-raised-button color="primary" (click)="moveToDone(task!)">Move to "Done"</button>
+    <button mat-raised-button class="mr-2" color="accent" (click)="editClicked(task!)" >Edit</button>
+    <button mat-raised-button color="warn" (click)="deleteClicked(task!)">Delete</button>
+  </div>
 </div>

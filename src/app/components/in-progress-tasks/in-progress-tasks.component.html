@@ -1,4 +1,7 @@
 <div>
   <h2 class="font-bold text-2xl mb-5 text-amber-500 text-center">IN PROGRESS</h2>
-  <app-task-card *ngFor="let task of tasks"/>
+  <div *ngIf="tasks.length">
+    <app-task-card  *ngFor="let task of tasks" [task]="task"/>
+  </div>
+  <h2 *ngIf="!tasks.length" class="text-center font-medium text-2xl mb-5 text-gray-400">No data</h2>
 </div>

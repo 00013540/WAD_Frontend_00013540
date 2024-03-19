@@ -1,1 +1,26 @@
-<p>edit works!</p>
+<form class="max-w-md mx-auto py-10" (submit)="updateTask()">
+  <mat-form-field class="w-full">
+    <mat-label>Title</mat-label>
+    <input matInput name="title" type="text" placeholder="Title" [(ngModel)]="editTask.title">
+  </mat-form-field>
+  <mat-form-field class="w-full">
+    <mat-label>Description</mat-label>
+    <input matInput name="description" type="text" placeholder="Description" [(ngModel)]="editTask.description">
+  </mat-form-field>
+  <mat-form-field class="w-full">
+    <mat-label>Priority</mat-label>
+    <mat-select name="priority" [(ngModel)]="editTask.priority">
+      <mat-option [value]="0">Low</mat-option>
+      <mat-option [value]="1">Medium</mat-option>
+      <mat-option [value]="2">High</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="w-full">
+    <mat-label>Due date</mat-label>
+    <input matInput name="dueDate" [matDatepicker]="picker" [(ngModel)]="editTask.dueDate">
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button class="mr-2" mat-raised-button color="primary" type="button" (click)="goBackHome()">Back</button>
+  <button mat-raised-button color="primary" type="submit">Submit</button>
+</form>
